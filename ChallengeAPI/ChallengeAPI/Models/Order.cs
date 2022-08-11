@@ -13,6 +13,19 @@ namespace ChallengeAPI.Models
         public int Quantity { get; set; }
         public DateTime? ShipDate { get; set; }
 
+        public static double TotalCost(double OrderQuantity, double ProductPrice)
+    {
+        double TotalCost = OrderQuantity * ProductPrice;
+        return (TotalCost);
+    }
+
+        public static double PayableGST(double OrderQuantity, double ProductPrice, double TotalGST, double WithoutGST)
+    {
+        double PayableGST = (((OrderQuantity * ProductPrice)*TotalGST)/WithoutGST);
+        return (PayableGST);
+    }
+
+
         [JsonIgnore]
         public virtual Customer Cust { get; set; }
         [JsonIgnore]

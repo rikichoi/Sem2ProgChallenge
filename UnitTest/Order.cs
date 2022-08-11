@@ -2,7 +2,7 @@ using System;
 
 namespace UnitTest
 {
-public class Program
+public class Order
 {
     public static double TotalCost(double OrderQuantity, double ProductPrice)
     {

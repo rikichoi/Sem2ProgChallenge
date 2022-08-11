@@ -1,110 +1,96 @@
+using System;
 namespace UnitTest;
 
-public class UnitTest1
+public class OrderTests
 {
 
 // Expected Result = 9 Passed, 8 Failed
 
+[Theory]
+[InlineData(1, 14.62, 14.62)]
+[InlineData(6, 14.62, 87.72)]
+[InlineData(2, 61.96, 123.92)]
+[InlineData(4, 731.94, 2927.76)]
+[InlineData(8, 731.94, 5855.52)]
+public void PassingTotalCostTestTheory(double OrderQuantity, double ProductPrice, double expected)
+{
+    // Arrange
+    
+    // Act -- call the method we ARE TESTING
+    double actual = Order.TotalCost(OrderQuantity, ProductPrice);
+
+    //Assert = CHECK IF THE RESULT = THE EXPECTED RESULT
+    Assert.Equal(expected, actual);
+}
+
+[Theory]
+[InlineData(2, 14.62, 1.1, 11, 2.924)]
+[InlineData(9, 261.96, 1.1, 11, 235.764)]
+[InlineData(3, 731.94, 1.1, 11, 219.58200000000005)]
+public void PassingPayableGSTTestTheory(double OrderQuantity, double ProductPrice, double TotalGST, double WithoutGST, double expected)
+{
+    // Arrange
+    
+    // Act -- call the method we ARE TESTING
+    double actual = Order.PayableGST(OrderQuantity, ProductPrice, TotalGST, WithoutGST);
+
+    //Assert = CHECK IF THE RESULT = THE EXPECTED RESULT
+    Assert.Equal(expected, actual);
+}
+
     [Fact]
     public void PassingTotalCostTest1()
     {
-        Assert.Equal(14.62, Program.TotalCost(1.0, 14.62));
+        Assert.Equal(14.62, Order.TotalCost(1.0, 14.62));
     }
 
     [Fact]
     public void PassingTotalCostTest2()
     {
-        Assert.Equal(87.72, Program.TotalCost(6, 14.62));
+        Assert.Equal(87.72, Order.TotalCost(6, 14.62));
     }
 
-    [Fact]
-    public void PassingTotalCostTest3()
-    {
-        Assert.Equal(123.92, Program.TotalCost(2, 61.96));
 
-    }
     [Fact]
     public void PassingTotalCostTest4()
     {
-        Assert.Equal(785.8799999999999, Program.TotalCost(3, 261.96));
+        Assert.Equal(785.8799999999999, Order.TotalCost(3, 261.96));
 
     }
     [Fact]
     public void PassingTotalCostTest5()
     {
-        Assert.Equal(2927.76, Program.TotalCost(4, 731.94));
+        Assert.Equal(2927.76, Order.TotalCost(4, 731.94));
 
     }
     [Fact]
     public void PassingTotalCostTest6()
     {
-        Assert.Equal(5855.52, Program.TotalCost(8, 731.94));
+        Assert.Equal(5855.52, Order.TotalCost(8, 731.94));
 
     }
 
 
-
-    [Fact]
-    public void FailingTotalCostTest1()
-    {
-        Assert.Equal(4, Program.TotalCost(9, 14.62));
-    }
-    [Fact]
-    public void FailingTotalCostTest2()
-    {
-        Assert.Equal(773.8799999999999, Program.TotalCost(3, 261.96));
-    }
-    [Fact]
-    public void FailingTotalCostTest3()
-    {
-        Assert.Equal(47.76, Program.TotalCost(4, 731.94));
-    }
-    [Fact]
-    public void FailingTotalCostTest4()
-    {
-        Assert.Equal(221.52, Program.TotalCost(8, 731.94));
-    }
 
 
     [Fact]
     public void PassingPayableGST1()
     {
-        Assert.Equal(2.924, Program.PayableGST(2, 14.62, 1.1, 11));
+        Assert.Equal(2.924, Order.PayableGST(2, 14.62, 1.1, 11));
     }
     [Fact]
     public void PassingPayableGST2()
     {
-        Assert.Equal(235.764, Program.PayableGST(9, 261.96, 1.1, 11));
+        Assert.Equal(235.764, Order.PayableGST(9, 261.96, 1.1, 11));
     }
     [Fact]
     public void PassingPayableGST3()
     {
-        Assert.Equal(219.58200000000005, Program.PayableGST(3, 731.94, 1.1, 11));
+        Assert.Equal(219.58200000000005, Order.PayableGST(3, 731.94, 1.1, 11));
     }
 
-    [Fact]
-    public void FailingPayableGST1()
-    {
-        Assert.Equal(492.99, Program.PayableGST(9, 14.62, 0.9, 82));
-    }
-    [Fact]
-    public void FailingPayableGST2()
-    {
-        Assert.Equal(88, Program.PayableGST(3, 261.96, 1.7, 21));
 
-    }
-    [Fact]
-    public void FailingPayableGST3()
-    {
-        Assert.Equal(296.17, Program.PayableGST(4, 731.94, 1.2, 32));
 
-    }
-    [Fact]
-    public void FailingPayableGST4()
-    {
-        Assert.Equal(200.9, Program.PayableGST(8, 731.94, 1.6, 67));
-
-    }
 
 
 

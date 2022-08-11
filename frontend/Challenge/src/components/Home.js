@@ -38,7 +38,7 @@ const Home = () => {
   const [updated, setUpdated] = useState(false);
 
   useEffect(() => {
-    axios.get(`https://orderschallengeapi.azurewebsites.net/api/Orders`)
+    axios.get(`https://localhost:7050/api/Orders`)
       .then(resp => {
         setOrders(resp.data);
         // console.log(resp);
@@ -47,7 +47,7 @@ const Home = () => {
   }, [updated, setUpdated, []]);
 
   useEffect(() => {
-    axios.get(`https://orderschallengeapi.azurewebsites.net/api/Customers`)
+    axios.get(`https://localhost:7050/api/Customers`)
       .then(resp => {
         setCustomers(resp.data);
         // console.log(resp);
@@ -56,7 +56,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`https://orderschallengeapi.azurewebsites.net/api/Products`)
+    axios.get(`https://localhost:7050/api/Products`)
       .then(resp => {
         setProducts(resp.data);
         // console.log(resp);
@@ -65,7 +65,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`https://orderschallengeapi.azurewebsites.net/api/Shippings`)
+    axios.get(`https://localhost:7050/api/Shippings`)
       .then(resp => {
         setShippings(resp.data);
         // console.log(resp);
@@ -270,7 +270,7 @@ const Home = () => {
 
                     <Button variant="contained" sx={{ marginRight: 3, my: 3 }} color="success"
                       onClick={() => (setUpdated(!updated),
-                        axios.post(`https://orderschallengeapi.azurewebsites.net/api/Orders`, {
+                        axios.post(`https://localhost:7050/api/Orders`, {
                           orderDate: orderDate,
                           prodId: prodID,
                           shipMode: shipMode,
@@ -298,7 +298,7 @@ const Home = () => {
                       <p><b>Shipping Mode: </b> {orders.shipMode}</p>
                       <Button variant="contained" sx={{ m: 3 }} color="error"
                         onClick={() => (setUpdated(!updated),
-                          axios.delete(`https://orderschallengeapi.azurewebsites.net/api/Orders/${orders.orderDate}/${orders.custId}/${orders.prodId}`).then(resp => {console.log(resp)
+                          axios.delete(`https://localhost:7050/api/Orders/${orders.orderDate}/${orders.custId}/${orders.prodId}`).then(resp => {console.log(resp)
                           setUpdated(!updated)}).catch(err => console.log(err)))}
                       >Remove</Button>
                       <Button variant="contained" sx={{ m: 3 }} color="secondary"
@@ -367,7 +367,7 @@ const Home = () => {
                   >Clear</Button>
                   <Button variant="contained" sx={{ m: 3 }} color="success"
                     onClick={() => (setUpdated(!updated),
-                      axios.put(`https://orderschallengeapi.azurewebsites.net/api/Orders`, {
+                      axios.put(`https://localhost:7050/api/Orders`, {
                         orderDate: editOrderDate,
                         prodId: editProdID,
                         shipMode: editShipMode,
